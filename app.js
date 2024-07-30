@@ -1,9 +1,13 @@
-const http = require('http');
+const express = require('express');
+const server = require('http').createServer();
+const app = express();
+const port = 3000;
 
-http.createServer(function(req, res) {
-res.write("full stack project");
-	res.end();
+app.get('/', (req, res) => {
+  res.sendFile('index.html', {root:__dirname})
+});
 
-}).listen(3000);
+server.on('request', app);
+server.listen(port, () => console.log(`listening on port ${port}`))
 
 console.log("Server started on port 3000");
